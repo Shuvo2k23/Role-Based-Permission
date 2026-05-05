@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Role List ') }}
+            {{ __('Article List ') }}
         </h2>
-        @can('create roles')
-        <a href="{{ route('roles.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded-md">Create Role</a>
+        @can('create articles')
+        <a href="{{ route('articles.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded-md">Create Article</a>
         @endcan
         </div>
     </x-slot>
@@ -18,31 +18,27 @@
                         <thead>
                             <tr>
                                 <th class="px-4 py-2">ID</th>
-                                <th class="px-4 py-2">Name</th>
-                                <th class="px-4 py-2">Permissions</th>
+                                <th class="px-4 py-2">Title</th>
+                                <th class="px-4 py-2">Author</th>
                                 <th class="px-4 py-2">Created At</th>
                                 <th class="px-4 py-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($roles as $role)
+                            @foreach ($articles as $article)
                                 <tr>
-                                    <td class="border px-4 py-2">{{ $role->id }}</td>
-                                    <td class="border px-4 py-2">{{ $role->name }}</td>
+                                    <td class="border px-4 py-2">{{ $article->id }}</td>
+                                    <td class="border px-4 py-2">{{ $article->title }}</td>
                                     <td class="border px-4 py-2">
-                                        @if ($role->permissions->isNotEmpty())
-                                            @foreach ($role->permissions as $permission)
-                                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">{{ $permission->name }}</span>
-                                            @endforeach
-                                        @endif
+                                        {{ $article->author }}
                                     </td>
-                                    <td class="border px-4 py-2">{{ $role->created_at->format('d M Y') }}</td>
+                                    <td class="border px-4 py-2">{{ $article->created_at->format('d M Y') }}</td>
                                     <td class="border px-4 py-2">
-                                        @can('edit roles')
-                                        <a href="{{ route('roles.edit', $role->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                                        @can('edit articles')
+                                        <a href="{{ route('articles.edit', $article->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
                                         @endcan
-                                        @can('delete roles')
-                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
+                                        @can('delete articles')
+                                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure?')">Delete</button>
