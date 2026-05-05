@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
+        <div class="flex items-center justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Permission') }}
         </h2>
+        <a href="{{ route('permissions.index') }}" class="bg-slate-700 text-white px-4 py-2 rounded-md">Back</a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -20,7 +23,7 @@
                             <label for="description">Description</label>
                             <textarea name="description" id="description"></textarea>
                         </div> --}}
-                        <button type="submit" class="bg-slate-700 tex-sm rounded-md px-5 py-3 text-white">Create Permission</button>
+                        <button type="submit" class="bg-slate-700 tex-sm rounded-md px-5 py-3 mt-5 text-white">Create Permission</button>
                     </form>
                 </div>
             </div>
