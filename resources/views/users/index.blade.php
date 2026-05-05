@@ -38,12 +38,16 @@
                                     </td>
                                     <td class="border px-4 py-2">{{ $user->created_at->format('d M Y') }}</td>
                                     <td class="border px-4 py-2">
+                                        @can('edit users')
                                         <a href="{{ route('users.edit', $user->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                                        {{-- <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
+                                        @endcan
+                                        @can('delete users')
+                                        <form action="#" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form> --}}
+                                        </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

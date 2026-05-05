@@ -4,7 +4,9 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Role List ') }}
         </h2>
+        @can('create roles')
         <a href="{{ route('roles.create') }}" class="bg-slate-700 text-white px-4 py-2 rounded-md">Create Role</a>
+        @endcan
         </div>
     </x-slot>
 
@@ -36,12 +38,16 @@
                                     </td>
                                     <td class="border px-4 py-2">{{ $role->created_at->format('d M Y') }}</td>
                                     <td class="border px-4 py-2">
+                                        @can('edit roles')
                                         <a href="{{ route('roles.edit', $role->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                                        @endcan
+                                        @can('delete roles')
                                         <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
